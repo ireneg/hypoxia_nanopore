@@ -1,0 +1,1 @@
+python /data/cephfs/punim0586/rkano/flair/flair.py quantify -r /data/cephfs/punim0586/rkano/VEGFA/BARCODES.tsv -i /data/cephfs/punim0586/rkano/VEGFA/flair.collapse.isoforms.fa --tpm 
