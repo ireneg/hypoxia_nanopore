@@ -6,7 +6,7 @@
 #SBATCH --partition=physical
 
 # The name of the job:
-#SBATCH --job-name="rdk_pilotpilot_genes"
+#SBATCH --job-name="EPAS1-bc01.sbatch"
 
 # The project ID which this job should run under:
 #SBATCH --account="punim0586"
@@ -68,4 +68,7 @@ samtools index -b /data/cephfs/punim0586/rkano/pilotpilot/qcat/barcode${bc}/gene
 
 #Makes a frequency table of read lengths                                                                               
 samtools view /data/cephfs/punim0586/rkano/pilotpilot/qcat/barcode${bc}/genes/$gene/sortedbams/sort${SLURM_ARRAY_TASK_ID}.barcode${bc}.bam | cut -f 10 | perl -ne 'chomp;print length($_) . "\n"' | sort | uniq -c >> /data/cephfs/punim0586/rkano/pilotpilot/qcat/barcode${bc}/genes/$gene/freqtables/sort${SLURM_ARRAY_TASK_ID}.csv
+
+#deletes the SAM file                                                                                                  
+
 
