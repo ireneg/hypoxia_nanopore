@@ -21,7 +21,7 @@
 # Use this email address:
 #SBATCH --mail-user=irene.gallego@unimelb.edu.au
 # The maximum running time of the job in days-hours:mins:sec
-#SBATCH --time=1000
+#SBATCH --time=1:00:00
 
 #SBATCH --array=1-3
 
@@ -33,7 +33,7 @@ fi
 
 # Assign the right ID to slurm task manager:
 
-sampleID=`head -n $SLURM_ARRAY_TASK_ID /data/cephfs/punim0586/igallego/repos/demultiplexing_ids.txt | tail -n 1 | awk '{ print $1 }'`
+sampleID=`head -n ${SLURM_ARRAY_TASK_ID} /data/cephfs/punim0586/igallego/repos/demultiplexing_ids.txt | tail -n 1 | awk '{ print $1 }'`
 
 # The actual command
 
@@ -46,4 +46,6 @@ module load SAMtools
 module load BEDTools
 module load minimap2
 
-python /data/cephfs/punim0586/shared/bin/flair/flair.py align -g /data/cephfs/punim0586/shared/genomes/hg38/hg38_renamed_no_alt_analysis_set.fa -r /data/cephfs/punim0586/shared/raw_data/epas_nanopore/hif1a/concatenated/$sampleID.fastq -o /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/hif1a/$sampleID.mapped
+# First, flair align
+python /data/cephfs/punim0586/shared/bin/flair/flair.py align -g /data/cephfs/punim0586/shared/genomes/hg38/hg38_renamed_no_alt_analysis_set.fa -r /data/cephfs/punim0586/shared/raw_data/epas_nanopore/hif1a/concatenated/${sampleID}.fastq -o /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/hif1a/${sampleID}.mapped
+
