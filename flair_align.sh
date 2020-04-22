@@ -23,7 +23,8 @@
 # The maximum running time of the job in days-hours:mins:sec
 #SBATCH --time=1:00:00
 
-#SBATCH --array=1-3
+# There is a header line in the file
+#SBATCH --array=2-4
 
 # Output control:
 #SBATCH --output="/data/cephfs/punim0586/igallego/hypoxia_nanopore/logs/mapping_%A_%a.log"
