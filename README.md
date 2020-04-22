@@ -31,14 +31,10 @@ Sample number, original sample code, RNA extraction batch, seq batch, barcode, O
 
 NB: I've changed the coding for time zero oxygen to ATM, as this is more accurate. 
 
-Seq batch: as there are more samples tham barcodes, each Nanopore run is separated into two batches.
-O2: atm = atmospheric oxygen.
-time: incubation time in hours.
-genotype: dai = Dai Chinese background. and = Andean background. wt = wildtype. mu = mutant.
-
-
-
-
+* Seq batch: as there are more samples tham barcodes, each Nanopore run is separated into two batches.
+* O2: 2.5, 5.0 or ATM (atmospheric oxygen).
+* time: incubation time in hours - 4, 24 or 48.
+* genotype: dai = Dai Chinese background. and = Andean background. wt = wildtype. mu = mutant.
 
 
 
