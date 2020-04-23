@@ -24,7 +24,7 @@
 #SBATCH --time=1:00:00
 
 # There is a header line in the file
-#SBATCH --array=2-4
+#SBATCH --array=2-101
 
 # Output control:
 #SBATCH --output="/data/cephfs/punim0586/igallego/hypoxia_nanopore/logs/mapping_%A_%a.log"
@@ -38,7 +38,7 @@ fi
 # Assign the right ID to slurm task manager:
 
 sampleID=`head -n ${SLURM_ARRAY_TASK_ID} /data/cephfs/punim0586/igallego/repos/hypoxia_nanopore/demultiplexing_ids.txt | tail -n 1 | awk '{ print $1 }'`
-geneID=$1  # Note that this means the user must set the gene name... 
+geneID=hif1a  # Note that this means the user must set the gene name... 
 
 # The actual commands
 module load Cython
@@ -51,7 +51,7 @@ module load BEDTools
 module load minimap2
 
 # First, flair align
-python /data/cephfs/punim0586/shared/bin/flair/flair.py align -g /data/cephfs/punim0586/shared/genomes/hg38/hg38_renamed_no_alt_analysis_set.fa -r /data/cephfs/punim0586/shared/raw_data/epas_nanopore/${geneID}/concatenated/${sampleID}.fastq -o /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/${geneID}/${sampleID}.mapped
+python /data/cephfs/punim0586/shared/bin/flair/flair.py align -g /data/cephfs/punim0586/shared/genomes/hg38/hg38_renamed_no_alt_analysis_set.fa -r /data/cephfs/punim0586/igallego/hypoxia_nanopore/raw_data/${geneID}/concatenated/${sampleID}.fastq -o /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/${geneID}/${sampleID}.mapped
 
 # Then, flair correct
 python /data/cephfs/punim0586/shared/bin/flair/flair.py correct -q /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/${geneID}/${sampleID}.mapped.bed -g //data/cephfs/punim0586/shared/genomes/hg38/hg38_renamed_no_alt_analysis_set.fa -f /data/cephfs/punim0586/igallego/hypoxia_nanopore/reference/gencode.v33.annotation.gtf -o /data/cephfs/punim0586/igallego/hypoxia_nanopore/mapped/${geneID}/${sampleID}.corrected
